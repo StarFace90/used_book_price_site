@@ -11,7 +11,9 @@
 <br>
 
 
-- 프로젝트 진행 관련 링크
+- 프로젝트 진행 관련 링크(공개)
 
 
-https://www.notion.so/1-used-book-site-a8a1304245114d23bed051c559682a87
+https://cute-bed-f16.notion.site/1-used-book-site-a8a1304245114d23bed051c559682a87
+
+
