@@ -1,0 +1,56 @@
+[
+    {
+      "id": 0,
+      "link": "http://www.test.com",
+      "img": "https://test.com/goods1",
+      "title": "[도서]1",
+      "author": [
+        "test ",
+        " test 출판사 ",
+        " 2019년 10월"
+      ],
+      "isbn": [
+        "ISBN13 - 978898xxxx20 ",
+        " ISBN10 - 898xxx7623"
+      ],
+      "priceText": [
+        "정가",
+        "매입가(최상)",
+        "매입가(상)",
+        "매입가(중)\n"
+      ],
+      "price": [
+        "x,000원",
+        "3,200원",
+        "x,900원",
+        "x,600원"
+      ]
+    },
+    {
+      "id": 1,
+      "link": "http://www.test.com",
+      "img": "https://test.com/goods2",
+      "title": "[도서]2",
+      "author": [
+        "test 역 ",
+        " test2출판사 ",
+        " 2020년 11월"
+      ],
+      "isbn": [
+        "ISBN13 - 97dsz3927729 ",
+        " ISBN10 - 898ssd7720"
+      ],
+      "priceText": [
+        "정가",
+        "매입가(균일가)",
+        "",
+        "\n"
+      ],
+      "price": [
+        "x3,000원",
+        "0원",
+        "",
+        ""
+      ]
+    }
+  ]
