@@ -36,3 +36,30 @@
     transform: rotate(360deg);
   }
 }
+
+.product-img {
+  position: absolute;
+  display: block;
+  margin-top: 3px;
+  width: 106px;
+  height: 103px;
+}
+
+.product-img.pull-left {
+  margin-left: 3%;
+}
+
+.product-body {
+  margin-left: 15%;
+  margin-right: 50%;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0px;
+}
+
+a {
+  text-decoration-line: none;
+  color: black;
+}
