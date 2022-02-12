@@ -1,102 +1,76 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import api from './Doc/testData.json';
-import './App.css'
 
 
 
-// 기본적인 서버와의 연결을 위한 테스트 컴포넌트 없이 일단 app에서 테스트 후 분리
+
+// 1. 서버와의 통신 연결 쿼리문 보내고 응답받기 테스트(콘솔)
+// 2. 컴포넌트 만들어서 분할하기
+// 3. 요청 보내고 응답 부분 화면에 출력하기 
+
+
 function App() {
 
-  //const [data, setData] = useState({ data: [] });
+  // 쿼리인 문자열부분 관리
+  const [query, setQuery] = useState("");
 
-  // 서버에서 데이터 받지 않으면 loading 되게끔..
-  //const [loading, setLoading] = useState(true);
+  // 서버 응답 데이터 보여주는 부분 관리
+  const [view, setView] = useState(null);
+  const [status, setStatus] = useState('요청대기중');
 
-  //console.log(api);
+
+  // Input창에 쿼리값 입력 후에 버튼을 누르면 
+  // 쿼리값이 서버로 요청 되게 끔 한다.
   // useEffect(() => {
 
-  //   const apiRequest = async () => {
-  //     const axiosRequest = await axios(
-  //       './testData.json'
-  //     );
-  //     console.log(axiosRequest)
-  //     setData(axiosRequest.data);
-  //     setLoading(false)
-  //   }
-  //   apiRequest();
+
   // }, []);
 
+  const queryRequest = () => {
+    axios.post('http://localhost:5000/', query)
+      .then(res => {
+        console.log("Status", res.status);
+        console.log("data", res.data);
+        setView(res.data);
+        setStatus(res.status);
+      })
+  }
 
 
 
-  // 서버에서 데이터 받지 않으면 loading 되게끔..
-  //if (loading) return <div>Loading...</div>
-  //console.log(data);
-  console.log(api);
 
+  // Input창에 쿼리값(검색어 값) 입력 이벤트
+  const inputQuery = (e) => {
+    setQuery(e.target.value);
+
+  }
+
+
+
+  // input창에 쿼리로 보낼 데이터를 입력하고 
+  // 버튼을 클릭하면 서버로 데이터 요청이 가고
+  // 서버에서 응답한 json 데이터를 보여준다
   return (
-    <>
-      <div className='container base'>
-        <div className='post-group-list'>
-          <ul>
-            <li>
-
-              {api.map(item => (
-                <div className='post-group' key={item.id}>
-                  <div className='product-img pull-left'>
-
-                    <div className='product-img-box'>
-                      <a href={item.link} target='_blank'>
-                        <img src={item.img} width='92' height='92' alt={item.title} />
-                      </a>
-                    </div>
-                  </div>
-                  <div className='product-body clearfix'>
-                    <div className='header'>
-                      <p className='deal-header-p'>
-                        알라딘
-                      </p>
-                      <p>
-                        <span>
-                          <a href={item.link} target='_blank'>
-                            {item.title}
-                          </a>
-                        </span>
-                        <p>
-                          <span>{item.author}</span>
-                          <p>
-                            <small>{item.isbn}</small>
-                          </p>
-                        </p>
-                      </p>
-                    </div>
-                    <div className='deal-price-group'>
-                      <p className='deal-price-info'>
-                        <h7>{item.priceText}</h7>
-                      </p>
-                      <p className='deal-price'>
-                        <h7>{item.price}</h7>
-                      </p>
-                    </div>
-
-                    {/* 이미지 링크와 새 창에서 열기 */}
+    <div>
+      <input type="search" value={query} onChange={inputQuery} />
+      <button type='button' onClick={queryRequest}></button>
+      <br></br>
+      <br></br>
+      <br></br>
+      <h2>현재 요청 응답상태 :
+        {status && status}
 
 
+      </h2>
 
+      {view &&
+        <textarea rows={60} cols={80} value={JSON.stringify(view, null, 2)} readOnly={true} />
 
-                  </div>
-                </div>
-              ))}
+      }
 
-            </li>
-          </ul>
-
-          {/* hello world */}
-        </div>
-      </div>
-    </>
+    </div>
   )
 }
+
 
 export default App;
