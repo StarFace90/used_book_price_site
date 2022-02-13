@@ -4,6 +4,9 @@ import DataHandle from './components/DataHandle';
 
 // 테스트용 json
 import JsonFile from './Doc/testData.json';
+import SearchBar from './components/SearchBar';
+
+console.log(SearchBar)
 
 
 
@@ -22,6 +25,9 @@ function App() {
   // 서버 응답 데이터 보여주는 부분 관리
   const [view, setView] = useState(JsonFile);
   const [status, setStatus] = useState('요청대기중');
+  const handleReset = () => {
+    setQuery("");
+  };
 
 
   // Input창에 쿼리값 입력 후에 버튼을 누르면 
@@ -30,6 +36,13 @@ function App() {
 
 
   // }, []);
+
+  // Input창에 쿼리값(검색어 값) 입력 이벤트
+  const inputQuery = (e) => {
+    setQuery(e.target.value);
+
+  }
+
 
   const queryRequest = () => {
     axios.post('http://localhost:5000/yes24', {
@@ -40,18 +53,17 @@ function App() {
         console.log("data", res.data);
         setView(res.data);
         setStatus(res.status);
+        handleReset("");
       })
-  }
+  };
+
+  // function handleSubmit(e) {
+  //   console.log("handle");
+  //   console.log(e.target);
+  //   e.preventDefault();
 
 
-
-
-  // Input창에 쿼리값(검색어 값) 입력 이벤트
-  const inputQuery = (e) => {
-    setQuery(e.target.value);
-
-  }
-
+  // }
 
 
   // input창에 쿼리로 보낼 데이터를 입력하고 
@@ -59,8 +71,31 @@ function App() {
   // 서버에서 응답한 json 데이터를 보여준다
   return (
     <div>
-      <input type="search" value={query} onChange={inputQuery} />
-      <button type='button' onClick={queryRequest}></button>
+      {/* <input type="search" value={query} onChange={inputQuery} /> */}
+
+      {/* <form className='search'
+        onSubmit={handleSubmit}> */}
+      <SearchBar
+        value={query}
+        onChange={inputQuery}
+        onKeyPress={queryRequest
+        }
+      />
+      {/* <input type="text"
+          className='search_bar'
+          value={query}
+          onChange={inputQuery}
+          
+        /> */}
+
+      {/* </form> */}
+      <button
+        type='button'
+        onClick={queryRequest}>
+
+      </button>
+      {/* <button onClick={onReset}>Reset</button> */}
+
       <br></br>
       <br></br>
       <br></br>
@@ -70,6 +105,14 @@ function App() {
       <br></br>
       <br></br>
       <br></br>
+
+
+      <div>
+
+
+        <button onClick={handleReset}>초기화</button>
+
+      </div>
 
 
       <div>{view && view.map(item => (
