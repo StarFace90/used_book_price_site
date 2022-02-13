@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import DataHandle from './components/DataHandle';
+
+// 테스트용 json
+import JsonFile from './Doc/testData.json';
+
 
 
 
@@ -15,7 +20,7 @@ function App() {
   const [query, setQuery] = useState("");
 
   // 서버 응답 데이터 보여주는 부분 관리
-  const [view, setView] = useState(null);
+  const [view, setView] = useState(JsonFile);
   const [status, setStatus] = useState('요청대기중');
 
 
@@ -27,7 +32,9 @@ function App() {
   // }, []);
 
   const queryRequest = () => {
-    axios.post('http://localhost:5000/', query)
+    axios.post('http://localhost:5000/yes24', {
+      query: query
+    })
       .then(res => {
         console.log("Status", res.status);
         console.log("data", res.data);
@@ -59,14 +66,22 @@ function App() {
       <br></br>
       <h2>현재 요청 응답상태 :
         {status && status}
-
-
       </h2>
+      <br></br>
+      <br></br>
+      <br></br>
 
-      {view &&
-        <textarea rows={60} cols={80} value={JSON.stringify(view, null, 2)} readOnly={true} />
 
-      }
+      <div>{view && view.map(item => (
+
+        <DataHandle view={item} key={item.id} />
+      ))}
+
+
+
+      </div>
+
+
 
     </div>
   )
