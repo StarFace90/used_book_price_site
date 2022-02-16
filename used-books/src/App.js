@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import DataHandle from './components/DataHandle';
+import './App.css';
+
 
 // 테스트용 json
 import JsonFile from './Doc/testData.json';
 import SearchBar from './components/SearchBar';
 
-console.log(SearchBar)
 
 
 
@@ -70,7 +71,7 @@ function App() {
   // 버튼을 클릭하면 서버로 데이터 요청이 가고
   // 서버에서 응답한 json 데이터를 보여준다
   return (
-    <div>
+    <div className='bg-red-100 py-4'>
       {/* <input type="search" value={query} onChange={inputQuery} /> */}
 
       {/* <form className='search'
@@ -99,7 +100,7 @@ function App() {
       <br></br>
       <br></br>
       <br></br>
-      <h2>현재 요청 응답상태 :
+      <h2 className='text-5xl font-bold underline'>현재 요청 응답상태는?: response:
         {status && status}
       </h2>
       <br></br>
@@ -115,10 +116,11 @@ function App() {
       </div>
 
 
-      <div>{view && view.map(item => (
+      <div className="md:w-1/2 mx-auto">
+        {view && view.map(item => (
 
-        <DataHandle view={item} key={item.id} />
-      ))}
+          <DataHandle view={item} key={item.id} />
+        ))}
 
 
 
@@ -132,3 +134,12 @@ function App() {
 
 
 export default App;
+
+
+
+
+
+// 서치바 컴포넌트 수정
+// 현재 전송 뒤에 input창 정리 되지 않음
+// 컴포넌트 적용안하고 그냥 input시에는
+//input 창 정리됨
