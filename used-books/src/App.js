@@ -115,18 +115,30 @@ function App() {
 
       </div>
 
+      <div className='grid grid-cols-2'>
+        {/* left */}
+        <div className="md-full mx-auto px-4 m-3">
+          {view && view.map(item => (
 
-      <div className="md:w-1/2 mx-auto">
-        {view && view.map(item => (
-
-          <DataHandle view={item} key={item.id} />
-        ))}
+            <DataHandle view={item} key={item.id} />
+          ))}
 
 
+
+        </div>
+
+        {/* right */}
+        <div className="md-full mx-auto px-4 m-3">
+          {view && view.map(item => (
+
+            <DataHandle view={item} key={item.id} />
+          ))}
+
+
+
+        </div>
 
       </div>
-
-
 
     </div>
   )
