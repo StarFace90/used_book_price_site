@@ -95,25 +95,38 @@ function App() {
 
       {/* <form className='search'
         onSubmit={handleSubmit}> */}
-      <SearchBar
-        value={query}
-        onChange={inputQuery}
-        onKeyPress={queryRequest
-        }
-      />
-      {/* <input type="text"
+
+
+      <div class="container h-20 flex justify-center items-center">
+        <div class="relative">
+          <div class="absolute top-4 left-3">
+            <i class="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i> </div>
+          <SearchBar
+            value={query}
+            onChange={inputQuery}
+            onKeyPress={queryRequest
+            }
+          />
+          {/* <input type="text"
           className='search_bar'
           value={query}
           onChange={inputQuery}
           
         /> */}
 
-      {/* </form> */}
-      <button
-        type='button'
-        onClick={queryRequest}>
+          <div class="absolute top-2 right-2">
+            <button class="h-10 w-20 text-white rounded-lg bg-blue-300 hover:bg-black"
+              type='button'
+              onClick={queryRequest}>
+              Search</button>
+          </div>
+        </div>
+      </div>
 
-      </button>
+
+      {/* </form> */}
+
+
       {/* <button onClick={onReset}>Reset</button> */}
 
       <br></br>
@@ -173,7 +186,7 @@ function App() {
 
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 

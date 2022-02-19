@@ -9,8 +9,9 @@ function SearchBar({ value, onChange, onKeyPress }) {
 
 
     return (
-
         <input type="text"
+            class="h-14 w-96 pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none"
+            placeholder="Search anything..."
             className='search'
             value={value.query}
             onChange={onChange}
