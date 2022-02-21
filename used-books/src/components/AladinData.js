@@ -3,8 +3,7 @@ import React from 'react'
 
 
 
-function AladinData({ book: { link, cover, title, author, pubDate, isbn, isbn13, priceText, price } }) {
-    //console.log("넘어오는 값", { ...arguments[0].book });
+function AladinData({ book: { link, cover, img, title, author, pubDate, isbn, isbn13, priceText, price, usedStatus } }) {
 
     const openInNewTab = (url) => {
         //var window = window.open(url, windowName, [windowFeatures]);
@@ -19,18 +18,34 @@ function AladinData({ book: { link, cover, title, author, pubDate, isbn, isbn13,
             <div className="w-5/12 p-2">
                 {/* <a href={link} target="_blank" rel='noopener noreferrer'> */}
                 {/* <div className="bg-indigo-200 h-60 w-55 mt-3"> */}
-                <div style={{ backgroundImage: `url(${cover})` }}
-                    className="bg-contain bg-no-repeat bg-center h-60 w-55 mt-3"
-                    // onClick={(e) => {
-                    //     e.preventDefault()
-                    //     window.location.href = link;\
-                    onClick={(e) => {
-                        openInNewTab(link)
-                        e.preventDefault()
-                    }
-                    }
-                ></div>
-                {/* </a> */}
+
+
+                {/* img, cover로 받아오는 이미지파일이 제각각임... */}
+                {(!img) ?
+                    <div style={{ backgroundImage: `url(${cover})` }}
+                        className="bg-contain bg-no-repeat bg-center h-60 w-55 mt-3"
+                        // onClick={(e) => {
+                        //     e.preventDefault()
+                        //     window.location.href = link;\
+                        onClick={(e) => {
+                            openInNewTab(link)
+                            e.preventDefault()
+                        }
+                        }
+                    ></div>
+                    :
+                    <div style={{ backgroundImage: `url(${img})` }}
+                        className="bg-contain bg-no-repeat bg-center h-60 w-55 mt-3"
+                        // onClick={(e) => {
+                        //     e.preventDefault()
+                        //     window.location.href = link;\
+                        onClick={(e) => {
+                            openInNewTab(link)
+                            e.preventDefault()
+                        }
+                        }
+                    ></div>
+                }
             </div>
 
             <div className='w-7/12 p-4'>
@@ -68,38 +83,50 @@ function AladinData({ book: { link, cover, title, author, pubDate, isbn, isbn13,
                         {/* ))} */}
                     </div>
                 </div>
-                <div className="mt-6">
 
 
+                {(!usedStatus) ?
+                    <div className="mt-6">
+                        <div className='px-2'>
+                            <div className="flex -mx-2">
+                                {/* 중고매입 불가 이면 금액이 없다. */}
+
+                                {/* 매입가 분류  */}
+                                {priceText && priceText.map(text => (
+                                    <div className="w-1/3 px-1" key={text.id}>
+                                        <div className='text-center font-medium flex-1 leading-5'> {text}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
 
 
+                        <div className='px-2'>
+                            <div className="flex -mx-2">
 
-                    <div className='px-2'>
-                        <div className="flex -mx-2">
-
-                            {/* 매입가 분류  */}
-                            {priceText.map(text => (
-                                <div className="w-1/3 px-1">
-                                    <div className='text-center font-medium flex-1 leading-5'> {text}</div>
-                                </div>
-                            ))}
+                                {/* 매입가 금액 */}
+                                {price && price.map(price => (
+                                    <div className="w-1/3 px-1" key={price.id}>
+                                        <div className='text-center font-medium text-red-500 mt-2 flex-1 leading-5 md:text-2xl'> {price}</div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
-                    <div className='px-2'>
-                        <div className="flex -mx-2">
 
-                            {/* 매입가 금액 */}
-                            {price.map(price => (
-                                <div className="w-1/3 px-1">
-                                    <div className='text-center font-medium text-red-500 mt-2 flex-1 leading-5 md:text-2xl'> {price}</div>
-                                </div>
-                            ))}
+                    // {/* <div className='text-red-500 mt-2 font-medium md:text-2xl'>{price}</div> */}
+                    :
+                    <div className="mt-6">
+                        <div className="w-1/3 px-1">
+                            <div className='text-center font-medium flex-1 leading-5'> {usedStatus}</div>
                         </div>
                     </div>
-                    {/* <div className='text-red-500 mt-2 font-medium md:text-2xl'>{price}</div> */}
-                </div>
-            </div >
-        </div>
+                }
+
+            </div>
+
+        </div >
+
 
     )
 }
