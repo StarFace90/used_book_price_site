@@ -9,10 +9,10 @@ import './App.css';
 import JsonFile from './Doc/testYesData.json';
 import JsonAlFile from './Doc/testAlandin.json';
 import SearchBar from './components/SearchBar';
+import Pagination from './components/Pagination';
 
 
-const App = () => {
-
+const App = (props) => {
 
   // yes24 데이터
   const [view, setView] = useState(JsonFile);
@@ -31,16 +31,27 @@ const App = () => {
 
     // 쿼리에 데이터가 들어오면 
     if (query !== null) {
-      return dueApi(query);
+      return pageNation(query);
     }
   }
 
 
-  const dueApi = function (query) {
-    console.log("ㅇㅁㄴㅇ", query);
-    setBook(query[0]);
-    setView(query[1]);
+  // const dueApi = query => {
+  //   setBook(query[0]);
+  //   setView(query[1]);
+  //   console.log("setBook", setBook);
+  // }
+
+
+
+  const pageNation = (pageBookData) => {
+    console.log("끌어올려짐?", pageBookData);
+    // setBook(pageBookData[0]);
+    // setView(pageBookData[1]);
   }
+
+
+
 
 
   return (
@@ -88,7 +99,12 @@ const App = () => {
               </>)
         }
 
-
+        {/* 임시적으로 알라딘 데이터 넣어준다(길이는 같으므로) */}
+        <Pagination
+          aladin={book}
+          yes24={view}
+          pageStatus={pageNation}
+        ></Pagination>
 
         {/* 로딩 애니메이션 */}
         {/* <div className="flex items-center justify-center space-x-2 animate-pulse">

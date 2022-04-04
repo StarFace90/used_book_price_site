@@ -1,0 +1,12 @@
+/* ul 스타일 없애고, flex로 가로 한줄 세우기 */
+.pageNum {
+  list-style: none;
+  display: flex;
+}
+
+/* 번호 별로 border 주고 커서효과 주기 */
+.pageNum li {
+  padding: 10px;
+  border: 1px solid white;
+  cursor: pointer;
+}
