@@ -1,14 +1,15 @@
 import React from 'react';
 
-function DataHandle({ view: { link, img, title, author, isbn, priceText, price } }) {
-
-
+function Yes24Data({ yes24: { link, img, title, author, isbn, priceText, price } }) {
+    //console.log("여기서???", { ...arguments[0].yes24 });
 
     const openInNewTab = (url) => {
         //var window = window.open(url, windowName, [windowFeatures]);
         const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
         if (newWindow) newWindow.opener = null
     }
+
+    // console.log(link);
 
 
     return (
@@ -38,11 +39,11 @@ function DataHandle({ view: { link, img, title, author, isbn, priceText, price }
 
                 {/* 저자 출판사 년도 */}
                 <div className='px-2'>
-                    <div class="flex -mx-2">
+                    <div className="flex -mx-2">
 
                         {author.map(author => (
-                            <div class="w-1/3 pl-1">
-                                <div className='text-left font-medium mt-2 md:text-lg'> {author}</div>
+                            <div className="w-1/3 pl-1" key={author.id}>
+                                <div className='text-left font-medium mt-2 md:text-lg' > {author}</div>
                             </div>
                         ))}
                     </div>
@@ -55,12 +56,12 @@ function DataHandle({ view: { link, img, title, author, isbn, priceText, price }
 
 
                 {/* isbn 분류  */}
-                <div div className='px-2' >
-                    <div class="flex -mx-2">
+                <div className='px-2' >
+                    <div className="flex -mx-2">
 
                         {isbn.map(isbn => (
-                            <div class="w-1/2 px-1">
-                                <div className='text-blue-400 mt-1'>{isbn}</div>
+                            <div className="w-1/2 px-1" key={isbn.id}>
+                                <div className='text-blue-400 mt-1' >{isbn}</div>
                             </div>
                         ))}
                     </div>
@@ -72,23 +73,25 @@ function DataHandle({ view: { link, img, title, author, isbn, priceText, price }
 
 
                     <div className='px-2'>
-                        <div class="flex -mx-2">
+                        <div className="flex -mx-2">
 
                             {/* 매입가 분류  */}
                             {priceText.map(text => (
-                                <div class="w-1/3 px-1">
-                                    <div className='text-center font-medium flex-1 leading-5'> {text}</div>
+                                <div className="w-1/3 px-1" key={text.id}>
+                                    <div className='text-center font-medium flex-1 leading-5' > {text}</div>
                                 </div>
                             ))}
                         </div>
                     </div>
                     <div className='px-2'>
-                        <div class="flex -mx-2">
+                        <div className="flex -mx-2">
 
                             {/* 매입가 금액 */}
                             {price.map(price => (
-                                <div class="w-1/3 px-1">
-                                    <div className='text-center font-medium text-red-500 mt-2 flex-1 leading-5 md:text-2xl'> {price}</div>
+                                <div className="w-1/3 px-1" key={price.id}>
+
+                                    <div className='text-center font-medium text-red-500 mt-2 flex-1 leading-5 md:text-2xl' > {price}</div>
+
                                 </div>
                             ))}
                         </div>
@@ -102,4 +105,4 @@ function DataHandle({ view: { link, img, title, author, isbn, priceText, price }
 }
 
 
-export default DataHandle;
+export default Yes24Data;
