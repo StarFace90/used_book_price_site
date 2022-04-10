@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import DataHandle from './components/DataHandle';
+import Yes24Data from './components/Yes24Data';
 import AladinData from './components/AladinData';
+import SearchBar from './components/SearchBar';
+import Pagination from './components/Pagination';
 import './App.css';
-
 
 // 테스트용 json
 import JsonFile from './Doc/testYesData.json';
 import JsonAlFile from './Doc/testAlandin.json';
-import SearchBar from './components/SearchBar';
-import Pagination from './components/Pagination';
+import BookDataView from './components/BookDataView';
+
 
 
 const App = (props) => {
 
   // yes24 데이터
-  const [view, setView] = useState(JsonFile);
+  const [bookYes24, setBookYes24] = useState(JsonFile);
 
   // 알라딘데이터 
-  const [book, setBook] = useState(JsonAlFile[0]);
-  console.log("view", view);
-  console.log(book);
+  const [bookAladin, setBookAladin] = useState(JsonAlFile[0]);
 
 
   const liftStateQueryApi = query => {
@@ -30,9 +28,9 @@ const App = (props) => {
     console.log("SearchBar에서 올라온 서버데이터", query);
 
     // 쿼리에 데이터가 들어오면 
-    if (query !== null) {
-      return pageNation(query);
-    }
+    // if (query !== null) {
+    //   return pageNation(query);
+    // }
   }
 
 
@@ -44,11 +42,6 @@ const App = (props) => {
 
 
 
-  const pageNation = (pageBookData) => {
-    console.log("끌어올려짐?", pageBookData);
-    // setBook(pageBookData[0]);
-    // setView(pageBookData[1]);
-  }
 
 
 
@@ -58,61 +51,32 @@ const App = (props) => {
     <div className='bg-red-100 py-4'>
       <SearchBar onLiftState={liftStateQueryApi} />
 
-      {/* tailwind grid 스타일 적용 */}
-      <div className='grid grid-cols-2'>
-        {/* left */}
+      {(((bookYes24 && bookAladin)) !== null)
+        ? (
+          <BookDataView
+            yes24={bookYes24}
+            aladin={bookAladin}
+          />)
+        : (
+          <BookDataView
+            yes24={bookYes24}
+            aladin={bookAladin}
+          />)}
 
-
-        {/* book에 데이터가 없으면 더미데이터가 나오고 그렇지 않으면 서버에서 받은 데이터가 나옴 */}
-        {
-          (book !== null)
-            ?
-            (
-              <>
-                <div className="md-full mx-auto px-4 m-3">
-                  {book && book.map(item => (
-                    <AladinData book={item} key={item.id} />
-                  ))}
-                </div>
-                <div className="md-full mx-auto px-4 m-3">
-                  {view && view.map(item => (
-
-                    <DataHandle view={item} key={item.id} />
-                  ))}
-                </div >
-              </>
-            )
-            :
-            (
-              <>
-                <div className="md-full mx-auto px-4 m-3">
-                  {book && book.map(item => (
-                    <AladinData book={item} key={item.id} />
-                  ))}
-                </div>
-                <div className="md-full mx-auto px-4 m-3">
-                  {view && view.map(item => (
-
-                    <DataHandle view={item} key={item.id} />
-                  ))}
-                </div >
-              </>)
-        }
-
-        {/* 임시적으로 알라딘 데이터 넣어준다(길이는 같으므로) */}
-        <Pagination
+      {/* 임시적으로 알라딘 데이터 넣어준다(길이는 같으므로) */}
+      {/* <Pagination
           aladin={book}
           yes24={view}
           pageStatus={pageNation}
-        ></Pagination>
+        ></Pagination> */}
 
-        {/* 로딩 애니메이션 */}
-        {/* <div className="flex items-center justify-center space-x-2 animate-pulse">
+      {/* 로딩 애니메이션 */}
+      {/* <div className="flex items-center justify-center space-x-2 animate-pulse">
           <div className="w-8 h-8 bg-blue-400 rounded-full"></div>
           <div className="w-8 h-8 bg-blue-400 rounded-full"></div>
           <div className="w-8 h-8 bg-blue-400 rounded-full"></div>
         </div> */}
-      </div>
+      {/* </div> */}
     </div >
   )
 }
